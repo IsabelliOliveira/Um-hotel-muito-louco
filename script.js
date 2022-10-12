@@ -1,4 +1,7 @@
-    var hotel ="";
+/* Voce aluno do Gabriel vendo este repositorio me de uma estrelinha por favor, gratidão */    
+
+
+   var hotel ="";
     var nome ="";
        
        function bemVindo(){
@@ -24,7 +27,7 @@
 
             alert("Bem vindo ao Hotel " + hotel + ", " + nome + ". É um imenso prazer ter você por aqui!" );
 
-			var escolha = parseInt(prompt('Selecione uma opção 1.) Reserva de Quartos 2.) Cadastro de Hóspedes 3.) Abastecimento de Carros 4.) Evento 5.) Sair'));
+			var escolha = parseInt(prompt('Selecione uma opção \n 1.) Reserva de Quartos \n 2.) Cadastro de Hóspedes \n 3.) Abastecimento de Carros \n 4.) Evento \n 5.) Sair'));
 
             switch(escolha) {
 
@@ -179,8 +182,115 @@
 		}
 
         function evento(){
+
+				var escolha_hospedes = parseInt(prompt('Cadastro do Evento\n\n Selecione uma opção: \n1. Contratação de garçons \n2. Contratação de Buffet \n3. Escolha de Auditório \n4. Sair'));
+
+				if (escolha_hospedes === 1) {
+					contratação_de_garçons();
+				} else if (escolha_hospedes === 2) {
+					contratação_de_Buffet();
+				} else if (escolha_hospedes === 3) {
+					escolha_de_auditório();
+				}else if (escolha_hospedes === 4) {
+					retorno();
+				} else {
+					erro_cadastro_evento();
+				}
+			
+
+        function contratação_de_garçons(){
+            var duração_evento = prompt("Qual a duração do evento em horas?")
+            var numero_garçons = prompt("Quantos garçons serão necessários?")
+            var vph_garçom = 10.50
+            var custo_do_evento = numero_garçons * vph_garçom * duração_evento
+
+            alert("Custo total: R$ " + custo_do_evento)
+        
+            var confirma = confirm("Gostaria de efetuar a reserva?");
+
+        if (confirma) {
+            alert(nome + " reserva efetuada com sucesso.");
+            evento();
+        } else {
+            evento();
+            }
+        }
+
+        function contratação_de_Buffet(){
+
+            var convidados = parseFloat(prompt("Qual o número de convidados para o evento?"));
+            var valor_cafe = 0.80;
+            var valor_agua = 0.40;
+            var valor_salgados = 0.34;
+
+            var cafe_pp = convidados * 0.20;
+            var agua_pp = convidados * 0.50;
+            var salgados_pp = convidados * 7;
+
+            var custo_total = (cafe_pp * valor_cafe) + (agua_pp * valor_agua) + (salgados_pp * valor_salgados);
+
+            if(convidados > 350){
+                alert("Quantidade de convidados superior à capacidade máxima.");
+                contratação_de_Buffet();
+            } else{
+                alert("O evento precisará de " + cafe_pp + " litros de café, " + agua_pp + " litros de água, " + salgados_pp + " salgados. O custo total do evento será de R$ " + custo_total );
+            }
+
+            var confirma = prompt("Gostaria de efetuar a reserva? S/N");
+
+            if (confirma == "s") {
+                alert(nome + " , reserva efetuada com sucesso.");
+                evento();
+            } else if (confirma == "n"){
+                alert(nome + " , reserva não realizada");
+                evento();
+                }
+            
+        }   
+
+        function escolha_de_auditório(){
+            var auditório_laranja = 150
+            var auditório_colorado = 350
+            var convidados = prompt("Qual o número de convidados para o seu evento?");
+
+            if(convidados > auditório_colorado ){
+                alert("Quantidade de convidados superior à capacidade máxima");
+                escolha_de_auditório()
+            } else if( convidados > 220 ){
+                alert("Use o auditório Colorado");
+            }else if( convidados < auditório_laranja ){
+                alert("Use o auditório Laranja");
+            }else if( convidados > auditório_laranja < 220){
+                alert("Use o auditório Laranja (inclua mais " + (convidados - auditório_laranja)   + " cadeiras)");
+            }
+            var confirma = prompt("Gostaria de efetuar a reserva? S/N");
+
+            if (confirma == "s") {
+                alert(nome + " , reserva efetuada com sucesso.");
+                evento();
+            } else if (confirma == "n"){
+                alert(nome + " , reserva não realizada");
+                evento();
+            }
+        }
+
+        function retorno(){
+			var confirma = confirm('Você deseja sair?');
+			if (confirma) {
+                inicio();
+			} else {
+				evento();
+			}
+        }
+        }
+        
+        function erro_cadastro_evento(){
+            alert('Por favor, informe um número entre 1 e 4');
+
+            erro_cadastro_evento();
             
         }
+
 
 		function erro() {
 			alert('Por favor, informe um número entre 1 e 4');
