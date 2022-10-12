@@ -1,7 +1,7 @@
 /* Voce aluno do Gabriel vendo este repositorio me de uma estrelinha por favor, gratidão */    
 
 
-   var hotel ="";
+      var hotel ="";
     var nome ="";
        
        function bemVindo(){
@@ -178,12 +178,64 @@
 
 		function abastecer_carros() {
 			alert('HOTEL ' + hotel + ' - ABASTECER');
-			inicio();
+		
+            var alcoolW = parseFloat(prompt("Qual o valor do álcool no posto Wayne Oil?"));
+			var gasolinaW = parseFloat(prompt("Qual o valor da gasolina no posto Wayne Oil?"));
+			var alcoolS = parseFloat(prompt("Qual o valor do álcool no posto Stark Petrol?"));
+			var gasolinaS = parseFloat(prompt("Qual o valor da gasolina no posto Stark Petrol?"));
+
+            var diferenca = 0;
+
+            if(alcoolW < alcoolS && gasolinaW < gasolinaS){
+                if(alcoolW < gasolinaW){
+                    diferenca = (alcoolW * 100)/gasolinaW;
+                    if(diferenca <= 70){
+                        alert(nome + ", é mais barato abastecer com álcool no Wayne Oil.");
+                    }else{
+                        alert(nome + ", é mais barato abastecer com gasolina no Wayne Oil.");
+                    }
+                }else{
+                    alert(nome + ", é mais barato abastecer com gasolina no Wayne Oil.");
+                }
+            }else if(alcoolS < alcoolW && gasolinaS < gasolinaW){
+                if(alcoolS < gasolinaS){
+                    diferenca = (alcoolS * 100)/gasolinaS;
+                    if(diferenca <= 70){
+                        alert(nome + ", é mais barato abastecer com álcool no Stark Petrol.");
+                    }else{
+                        alert(nome + ", é mais barato abastecer com gasolina no Stark Petrol.");
+                    }
+                }else{
+                    alert(nome + ", é mais barato abastecer com gasolina no Stark Petrol.");
+                }
+            }else{
+                if(alcoolW < gasolinaS){
+                    diferenca = (alcoolW * 100)/gasolinaS;
+                    if(diferenca <= 70){
+                        alert(nome + ", é mais barato abastecer com álcool no Wayne Oil.");
+                    }else{
+                        alert(nome + ", é mais barato abastecer com gasolina no Stark Petrol.");
+                    }
+                }else if(alcoolS < gasolinaW){
+                    diferenca = (alcoolS * 100)/gasolinaW;
+                    if(diferenca <= 70){
+                        alert(nome + ", é mais barato abastecer com álcool no Stark Petrol.");
+                    }else{
+                        alert(nome + ", é mais barato abastecer com gasolina no Wayne Oil.");
+                    }
+                }
+            }
+            inicio()
+
 		}
+
+//Inicio do Evento 
 
         function evento(){
 
-				var escolha_hospedes = parseInt(prompt('Cadastro do Evento\n\n Selecione uma opção: \n1. Contratação de garçons \n2. Contratação de Buffet \n3. Escolha de Auditório \n4. Sair'));
+            alert('HOTEL ' + hotel + ' - EVENTO')
+
+				var escolha_hospedes = parseInt(prompt('Cadastro do Evento\n\n Selecione uma opção: \n1. Contratação de garçons \n2. Contratação de Buffet \n3. Escolha de Auditório \n4. Horario do Evento \n5. Sair'));
 
 				if (escolha_hospedes === 1) {
 					contratação_de_garçons();
@@ -192,6 +244,8 @@
 				} else if (escolha_hospedes === 3) {
 					escolha_de_auditório();
 				}else if (escolha_hospedes === 4) {
+					horario_evento();
+				}else if (escolha_hospedes === 5) {
 					retorno();
 				} else {
 					erro_cadastro_evento();
@@ -274,6 +328,26 @@
             }
         }
 
+        function horario_evento(){
+
+            var dia = prompt("Qual o dia do seu evento?").toLowerCase();
+            var hora = prompt("Qual a hora do seu evento?");
+
+            if(dia == "segunda" || dia == "terça" || dia =="quarta" || dia =="quinta" || dia =="sexta" && hora >=7 && hora <23){
+                var nome_da_empresa =  prompt("Qual o nome da empresa?");
+                alert("Restaurante reservado para " + nome_da_empresa + ". " + dia + " ás " + hora + "hs.")
+                 evento() 
+            }else if(dia == "sabado" || dia == "domingo" && hora >=7 && hora <15){
+                var nome_da_empresa =  prompt("Qual o nome da empresa?");
+                alert("Restaurante reservado para " + nome_da_empresa + ". " + dia + " ás " + hora + "hs.")
+                 evento() 
+            }else {
+                alert("Restaurante indisponível")
+                horario_evento()
+            }
+            
+        }
+        
         function retorno(){
 			var confirma = confirm('Você deseja sair?');
 			if (confirma) {
@@ -282,18 +356,19 @@
 				evento();
 			}
         }
-        }
-        
+
         function erro_cadastro_evento(){
             alert('Por favor, informe um número entre 1 e 4');
 
-            erro_cadastro_evento();
-            
+            evento();
+        
+        }
         }
 
+//Fim do Evento 
 
 		function erro() {
-			alert('Por favor, informe um número entre 1 e 4');
+			alert('Por favor, informe um número entre 1 e 5');
 			inicio();
 		}
 
